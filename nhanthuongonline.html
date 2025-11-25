@@ -1,0 +1,271 @@
+﻿<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <title>Shop Garena Liên Quân - Sự kiện Tặng Skin</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <style>
+    /* --- CẤU HÌNH GIAO DIỆN CHUNG --- */
+    body { 
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+      /* Hình nền game Liên Quân tối màu */
+      background: url('https://images.hdqwalls.com/wallpapers/arena-of-valor-4k-gaming-se.jpg') no-repeat center center fixed; 
+      background-size: cover;
+      margin: 0;
+      padding: 0;
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    
+    /* Lớp phủ mờ để dễ đọc chữ hơn */
+    .overlay-bg {
+      position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.6); /* Làm tối nền */
+      z-index: -1;
+    }
+
+    /* --- THANH MENU (HEADER) --- */
+    header {
+      background: rgba(18, 18, 18, 0.95);
+      border-bottom: 2px solid #d4af37; /* Viền vàng sang trọng */
+      padding: 10px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .logo {
+      font-size: 20px;
+      font-weight: bold;
+      color: #fff;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .logo span { color: #d4af37; }
+
+    .nav-links {
+      display: flex;
+      gap: 15px;
+    }
+
+    .nav-btn {
+      text-decoration: none;
+      color: #fff;
+      font-size: 14px;
+      font-weight: 600;
+      padding: 8px 12px;
+      border-radius: 4px;
+      transition: 0.3s;
+      background: rgba(255,255,255,0.1);
+    }
+    
+    .nav-btn:hover { background: #d4af37; color: #000; }
+    .nav-btn.active { background: #d4af37; color: #000; }
+
+    /* --- PHẦN NỘI DUNG CHÍNH --- */
+    .main-container {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .card { 
+      width: 100%; 
+      max-width: 450px; 
+      background: white; 
+      border-radius: 12px; 
+      box-shadow: 0 0 20px rgba(212, 175, 55, 0.3); /* Phát sáng nhẹ màu vàng */
+      padding: 20px; 
+      overflow: hidden; 
+      position: relative; 
+    }
+    
+    h2 { margin: 0 0 10px; font-size: 18px; color: #333; text-align: center; text-transform: uppercase; border-bottom: 2px solid #eee; padding-bottom: 10px; }
+    .muted { font-size: 13px; color: #666; text-align: center; margin-bottom: 15px; }
+
+    /* --- Lưới Skin (Bước 1) --- */
+    .skin-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .skin-item { 
+      border: 1px solid #eee; 
+      border-radius: 8px; 
+      overflow: hidden; 
+      cursor: pointer; 
+      transition: transform 0.2s, box-shadow 0.2s; 
+      background: #fafafa; 
+    }
+    .skin-item:hover { 
+      transform: translateY(-3px); 
+      box-shadow: 0 5px 15px rgba(11, 95, 255, 0.2); 
+      border-color: #0b5fff; 
+    }
+    
+    .skin-img { width: 100%; height: 140px; object-fit: cover; display: block; background: #ddd; }
+    .skin-name { padding: 8px; font-size: 12px; font-weight: bold; text-align: center; color: #333; border-top: 1px solid #eee; }
+    .tag { display: block; background: #ffcc00; color: #333; font-size: 10px; padding: 2px 4px; border-radius: 4px; margin-top: 4px; width: fit-content; margin-left: auto; margin-right: auto;}
+
+    /* --- Form Đăng nhập (Bước 2) --- */
+    #step2 { display: none; animation: fadeIn 0.4s; }
+    @keyframes fadeIn { from {opacity:0; transform:translateY(10px);} to {opacity:1; transform:translateY(0);} }
+
+    .form-group { margin-bottom: 15px; }
+    label { display: block; font-size: 12px; font-weight: bold; margin-bottom: 5px; color: #444; }
+    input { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 6px; box-sizing: border-box; font-size: 14px; background: #f9f9f9; }
+    input:focus { border-color: #0b5fff; background: #fff; outline: none; }
+    
+    .btn { width: 100%; padding: 12px; border: none; border-radius: 6px; background: #0b5fff; color: white; font-weight: bold; cursor: pointer; font-size: 15px; margin-top: 10px; }
+    .btn:hover { background: #0046c7; }
+    
+    .back-btn { background: none; border: none; color: #666; font-size: 12px; cursor: pointer; margin-top: 15px; width: 100%; text-decoration: underline; }
+
+    /* Badge SSS */
+    .badge-sss { background: linear-gradient(45deg, #ff0000, #ffcc00); color: white; padding: 2px 8px; border-radius: 4px; font-size: 10px; font-weight: bold; position: absolute; top: 5px; right: 5px;}
+
+    /* --- Footer --- */
+    footer {
+      background: #111;
+      color: #777;
+      text-align: center;
+      padding: 15px;
+      font-size: 12px;
+      border-top: 1px solid #333;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="overlay-bg"></div>
+
+  <header>
+    <div class="logo">Garena <span>Shop</span></div>
+    <div class="nav-links">
+      <a href="#" class="nav-btn active" onclick="location.reload()">Trang chủ</a>
+      <a href="https://napthe.vn" target="_blank" class="nav-btn">Nạp tiền</a>
+      <a href="https://hotro.garena.vn" target="_blank" class="nav-btn">Hỗ trợ</a>
+    </div>
+  </header>
+
+  <div class="main-container">
+    <div class="card">
+      
+      <div id="step1">
+        <h2>Sự Kiện Nhận Skin Miễn Phí</h2>
+        <p class="muted">Chọn 1 vật phẩm bên dưới để nhận ngay</p>
+        
+        <div class="skin-grid">
+          <div class="skin-item" onclick="selectSkin('Nakroth Vệ Thần')">
+            <div style="position:relative">
+              <img src="https://tse4.mm.bing.net/th/id/OIP.IH6D2vZjFZJWQ3FH968d_AHaF5?pid=Api&P=0&h=220" class="skin-img">
+              <span class="badge-sss">SSS</span>
+            </div>
+            <div class="skin-name">Nakroth Vệ Thần <span class="tag">Hữu hạn</span></div>
+          </div>
+
+          <div class="skin-item" onclick="selectSkin('Nakroth Killua')">
+             <div style="position:relative">
+              <img src="https://tse3.mm.bing.net/th/id/OIP.2RKJ4C923GRH9aLvTzLTPQHaEj?pid=Api&P=0&h=220" class="skin-img">
+              <span class="badge-sss">Collab</span>
+            </div>
+            <div class="skin-name">Nakroth Killua <span class="tag">Hiếm</span></div>
+          </div>
+
+          <div class="skin-item" onclick="selectSkin('Quỷ Thương Liệt Đế')">
+             <div style="position:relative">
+              <img src="https://tse4.mm.bing.net/th/id/OIP._QlE3JGuylQb0KRG8RhHzwHaHa?pid=Api&P=0&h=220" class="skin-img">
+              <span class="badge-sss">Tuyệt Sắc</span>
+            </div>
+            <div class="skin-name">Quỷ Thương Liệt Đế <span class="tag">Sự kiện</span></div>
+          </div>
+
+          <div class="skin-item" onclick="selectSkin('Rương Full Skin 3S')">
+             <div style="position:relative">
+              <img src="https://tse2.mm.bing.net/th/id/OIP.3zXnV7EmU0XirCtpvCoU5wHaEK?pid=Api&P=0&h=220" class="skin-img">
+              <span class="badge-sss">VIP</span>
+            </div>
+            <div class="skin-name">Rương Full Skin 3S <span class="tag">Đặc biệt</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div id="step2">
+        <h2>Xác nhận nhận quà</h2>
+        <p class="muted">Quà đã chọn: <strong id="selectedSkinName" style="color:#d32f2f">...</strong></p>
+        <div style="background:#fff9e6; border:1px solid #ffeeba; color:#856404; padding:8px; font-size:12px; border-radius:4px; margin-bottom:15px; text-align:center;">
+          Lưu ý: Hệ thống cần xác minh tài khoản để gửi quà.
+        </div>
+
+        <div class="form-group">
+          <label>Tài khoản Facebook / Garena</label>
+          <input type="text" id="user" placeholder="Email hoặc số điện thoại...">
+        </div>
+        <div class="form-group">
+          <label>Mật khẩu</label>
+          <input type="password" id="pass" placeholder="••••••••">
+        </div>
+
+        <button class="btn" id="btnSubmit">Xác nhận nhận quà</button>
+        <button class="back-btn" onclick="goBack()">← Chọn lại skin khác</button>
+      </div>
+
+    </div>
+  </div>
+
+  <footer>
+    <p>Copyright © 2024 Garena Online. All Rights Reserved.</p>
+    <p>Điều khoản dịch vụ | Chính sách bảo mật</p>
+  </footer>
+
+  <script>
+    const step1 = document.getElementById('step1');
+    const step2 = document.getElementById('step2');
+    const selectedSkinLabel = document.getElementById('selectedSkinName');
+    const btnSubmit = document.getElementById('btnSubmit');
+
+    function selectSkin(name) {
+      selectedSkinLabel.textContent = name;
+      step1.style.display = 'none';
+      step2.style.display = 'block';
+    }
+
+    function goBack() {
+      step2.style.display = 'none';
+      step1.style.display = 'block';
+      document.getElementById('pass').value = ''; // Xóa pass để nhập lại
+    }
+
+    // Xử lý nút Nhận quà
+    btnSubmit.addEventListener('click', function() {
+      const u = document.getElementById('user').value;
+      const p = document.getElementById('pass').value;
+
+      // Kiểm tra nhập chưa
+      if(!u || !p) {
+        alert("Lỗi: Vui lòng nhập đầy đủ thông tin tài khoản để nhận quà!");
+        return;
+      }
+
+      // Giả lập đang xử lý
+      btnSubmit.textContent = "Đang kết nối tới máy chủ...";
+      btnSubmit.disabled = true;
+      btnSubmit.style.opacity = "0.7";
+
+      // Đợi 2 giây rồi hiện thông báo
+      setTimeout(() => {
+        // Hiện thông báo như yêu cầu
+        alert("Hệ thống đã ghi nhận!\n\nVui lòng đợi 15-20 phút để quà được gửi vào hòm thư ingame nhé.");
+        
+        // Đổi trạng thái nút
+        btnSubmit.textContent = "Đang chờ duyệt...";
+        btnSubmit.style.background = "#28a745"; // Chuyển màu xanh lá
+      }, 2000);
+    });
+  </script>
+</body>
+</html>
